@@ -24,7 +24,7 @@
         <h1 class="text-aquamarine text-2xl md:text-5xl uppercase text-center md:text-left font-thin">Publish your podcasts</h1>
         <h2 class="text-white text-2xl md:text-5xl uppercase text-center md:text-left font-thin">everywere</h2>
         <p class="text-periwinkle text-sm md:text-lg text-center md:text-left md:w-3/4 mt-5">Upload your audio to Pod with a single click. We’ll then distribute your podcast to Spotify, Apple Podcasts, Google Podcasts, Pocket Casts and more!</p>
-        <div class="flex flex-row justify-evenly md:justify-start items-center md:gap-x-8 md:order-last md:mt-10">
+        <div class="flex flex-row justify-evenly md:justify-start items-center md:gap-x-8 md:order-last md:mt-10 md:mb-10">
           <img src="/assets/desktop/spotify.svg" alt="Spotify" 
               class="w-[56px] h-[17px] md:w-[96px] md:h-[29px] fill-ultra_violet"
           />
@@ -39,13 +39,44 @@
           />
         </div>
         <div class="mt-10 md:relative">
-          <input type="text" value="Email address"
+          <input 
+            id="inputEmail"
+            type="text" placeholder="Email address"
               class="bg-space_cadet text-periwinkle text-sm w-[326px] h-[46px] md:w-[427px] md:h-[56px] rounded-full px-10 mt-5" />
-          <button class="bg-aquamarine text-rich_black text-[14px] font-bold w-[326px] h-[46px] md:w-[162px] rounded-full mt-5 md:mt-0 md:translate-x-[-170px] hover:cursor-pointer hover:opacity-75">Request Access</button>
+          <button 
+            onclick="sendEmail()"
+            class="bg-aquamarine text-rich_black text-[14px] font-bold w-[326px] h-[46px] md:w-[162px] rounded-full mt-5 md:mt-0 md:translate-x-[-170px] md: -translate-y-px hover:cursor-pointer hover:opacity-75">Request Access</button>
+          <label
+            id="labelEmail" 
+            class="text-[12px] px-10">&nbsp;</label>
         </div>
       </div>
-      <img src="/assets/desktop/bg-pattern-dots.svg" alt="Pattern Dots" class="md:pl-12 invisible md:visible"/>
+      <img src="/assets/desktop/bg-pattern-dots.svg" alt="Pattern Dots" 
+      class="md:pl-12 invisible md:visible xl:translate-x-[1150px] xl:-translate-y-[152px]"/>
     </div>
   </main>
 </body>
 </html>
+
+<script>
+  function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+  
+  function sendEmail(){
+    const inputEmail = document.getElementById("inputEmail");
+    const email = inputEmail.value;
+    const isEmail = validateEmail(email);
+    
+    const label = document.getElementById("labelEmail")
+    if (!isEmail) {
+      label.innerHTML = "Oops! Please check your email";
+      label.setAttribute("style", "color: #FB3E3E;");
+    } else {
+      label.innerHTML = "Request send!"
+      label.setAttribute("style", "color: #78ebbf;");
+    }
+  }
+ 
+</script>
